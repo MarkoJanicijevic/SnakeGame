@@ -38,3 +38,12 @@ class Snake:
         new_segment.penup()
         new_segment.goto(pos)
         self.segments.append(new_segment)
+
+
+    def snake_reset(self):
+        for seg in self.segments:
+            seg.goto(10000, 10000)
+        self.segments.clear()
+        self.create_snake()
+        self.snake_head = self.segments[0]
+        self.snake_head.shape("triangle")
