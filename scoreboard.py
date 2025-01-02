@@ -4,7 +4,8 @@ class Score(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
-        self.highscore = 0
+        with open("highscore.txt") as highscore_doc:
+            self.highscore = int(highscore_doc.read())
         self.color("red")
         self.penup()
         self.hideturtle()
@@ -15,6 +16,7 @@ class Score(Turtle):
     def update_scoreboard(self):
         self.clear()
         self.write(f"Score: {self.score}       HighScore: {self.highscore}")
+
 
     def increase_score(self):
         self.score += 1
@@ -27,5 +29,7 @@ class Score(Turtle):
     def reset(self):
         if self.score > self.highscore:
             self.highscore = self.score
+            with open("highscore.txt", mode="w") as highscore_doc:
+                highscore_doc.write(str(self.highscore))
         self.score = 0
         self.update_scoreboard()
